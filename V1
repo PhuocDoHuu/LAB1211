@@ -1,7 +1,63 @@
 Hello my name is Nhi
 
 
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        FrequencyOfNumber fon = new FrequencyOfNumber();
+        fon.quickSort(arr, 0, n-1);
+
+        for (int res : arr){
+            System.out.print(res +" ");
+        }
+    }
+
+    void quickSort(int [] arr, int left, int right){
+        if (left < right){
+            int indexPivot = patrition(arr, left, right);
+
+            quickSort(arr, left, indexPivot-1);
+            quickSort(arr, indexPivot+1, right);
+        }
+    }
+
+    int patrition(int [] arr, int left, int right){
+        int pivot = arr[left];
+        int low = left+1;
+        int high = right;
+
+        while (low <= high) {
+            //set low <= right to eliminate exception
+            while (low <= right && pivot >= arr[low])
+                low++;
+            while (pivot < arr[high])
+                high--;
+
+            if (low <= high) {
+                swap(arr, low, high);
+                low++;
+                high--;
+            }
+        }
+
+        //swap with high
+        swap(arr, left, high);
+        return high;
+    }
+
+    void swap (int [] arr, int x, int y){
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+    }
 
 
 
